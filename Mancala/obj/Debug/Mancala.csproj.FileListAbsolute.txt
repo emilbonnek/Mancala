@@ -1,0 +1,17 @@
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\bin\Debug\Mancala.exe.config
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\bin\Debug\Mancala.exe
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\bin\Debug\Mancala.pdb
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\Mancala.csprojAssemblyReference.cache
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\App.g.cs
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\Mancala_MarkupCompile.cache
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\Mancala_MarkupCompile.lref
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\Mancala.g.resources
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\Mancala.Properties.Resources.resources
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\Mancala.csproj.GenerateResource.cache
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\Mancala.csproj.CoreCompileInputs.cache
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\Mancala.exe
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\Mancala.pdb
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\LauncherWindow.g.cs
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\GameWindow.g.cs
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\GameWindow.baml
+C:\Users\emilbonnek\source\repos\Mancala\Mancala\obj\Debug\LauncherWindow.baml

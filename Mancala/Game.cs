@@ -31,13 +31,14 @@ namespace Mancala
 
 
 
-        public void playTurn()
+        public int playTurn()
         {
             Player currentplayer = players[currentState.turn % players.Length];
             currentState.show();
             int decision = currentplayer.playTurn(currentState);
             currentState = currentState.DryPlay(decision);
             Console.WriteLine("-----------------------------------------------");
+            return decision;
         }
 
 

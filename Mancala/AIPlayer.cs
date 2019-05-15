@@ -12,7 +12,7 @@ namespace Mancala
         public override int playTurn(Gamestate state)
         {
             Console.WriteLine("{0}'s turn", name);
-            int decision = Minimax(-1, state, 9).Item1;
+            int decision = Minimax(-1, state, 5).Item1;
             Console.WriteLine(decision + 1);
             return decision;
         }

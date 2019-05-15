@@ -5,14 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mancala"
         mc:Ignorable="d"
-        Title="LauncherWindow" Height="450" Width="600">
-    <Grid>
-        <Button Content="Start new game" HorizontalAlignment="Left" Click="Button_Click" Margin="261,391,0,0" VerticalAlignment="Top" Width="75"/>
+        Title="LauncherWindow" Height="350" Width="600">
+    <Grid Margin="0,0,0,0">
+        <Button Content="Start new game" HorizontalAlignment="Left" Click="Button_Click" Margin="250,220,0,0" VerticalAlignment="Top" Width="100"/>
+
+        <GroupBox x:Name="Box1" Header="Player1" HorizontalAlignment="Left" Height="100" Margin="100,35,0,0" VerticalAlignment="Top" Width="85">
+            <StackPanel>
+                <RadioButton x:Name="_RadioPlayerLeft" Content="Player" FlowDirection="RightToLeft" Checked="_RadioPlayer_Checked" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+                <RadioButton x:Name="_RadioAILeft" Content="AI" FlowDirection="RightToLeft" Checked="_RadioPlayer_Checked" HorizontalAlignment="Left" Margin="20,20,0,0" RenderTransformOrigin="0.546,0.474" IsChecked="True" />
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox x:Name="Box2" Header="Player2" HorizontalAlignment="Right" Height="100" Margin="0,35,100,0" VerticalAlignment="Top" Width="85"/>
+        <StackPanel>
+            <RadioButton x:Name="_RadioPlayerRight" Content="Player" Checked="_RadioPlayer_Checked" HorizontalAlignment="Right" Margin="0,63,124,0" VerticalAlignment="Top" />
+            <RadioButton x:Name="_RadioAIRight" Content="AI" Checked="_RadioPlayer_Checked" HorizontalAlignment="Right" Margin="0,20,142,0" VerticalAlignment="Top" IsChecked="True"/>
+        </StackPanel>
         
-        <RadioButton x:Name="_RadioPlayer" Content="Player" Checked="_RadioPlayer_Checked" HorizontalAlignment="Left" Margin="95,23,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="_RadioAI" Content="AI" Checked="_RadioPlayer_Checked" HorizontalAlignment="Left" Margin="95,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,0.474" />
-        <TextBox x:Name="_Name1" HorizontalAlignment="Left" Height="23" Margin="26,320,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="_Name2" HorizontalAlignment="Left" Height="23" Margin="406,320,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        
+        <TextBox x:Name="_Name1" GotKeyboardFocus="_Name1_GotKeyboardFocus" LostKeyboardFocus="_Name1_LostKeyboardFocus" HorizontalAlignment="Left" Height="23" Margin="80,164,0,0" TextWrapping="Wrap" Text="Player 1 Name" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="_Name2" GotKeyboardFocus="_Name2_GotKeyboardFocus" LostKeyboardFocus="_Name2_LostKeyboardFocus" HorizontalAlignment="Right" Height="23" Margin="0,164,80,0" TextWrapping="Wrap" Text="Player 2 Name" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

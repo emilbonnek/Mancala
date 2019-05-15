@@ -32,5 +32,3 @@ C:\Users\Ejer\Documents\GitHub\Mancala\Mancala\obj\Debug\Mancala.csproj.Generate
 C:\Users\Ejer\Documents\GitHub\Mancala\Mancala\obj\Debug\Mancala.csproj.CoreCompileInputs.cache
 C:\Users\Ejer\Documents\GitHub\Mancala\Mancala\obj\Debug\Mancala.exe
 C:\Users\Ejer\Documents\GitHub\Mancala\Mancala\obj\Debug\Mancala.pdb
-C:\Users\Ejer\Documents\GitHub\Mancala\Mancala\obj\Debug\InputeName.g.cs
-C:\Users\Ejer\Documents\GitHub\Mancala\Mancala\obj\Debug\InputeName.baml

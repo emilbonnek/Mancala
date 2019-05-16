@@ -27,24 +27,19 @@
         <Label x:Name="_1r4" Content="1r4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="525,345,0,0" Width="50" Height="50"/>
         <Label x:Name="_1r5" Content="1r5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="625,345,0,0" Width="50" Height="50"/>
 
-        <Button x:Name="_1r0_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="125,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_1r1_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="225,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_1r2_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="325,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_1r3_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="425,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_1r4_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="525,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_1r5_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="625,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_1r0_Button" Click="PitPicked" Tag="0" Content="PICK" HorizontalAlignment="Left" Margin="125,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_1r1_Button" Click="PitPicked" Tag="1" Content="PICK" HorizontalAlignment="Left" Margin="225,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_1r2_Button" Click="PitPicked" Tag="2" Content="PICK" HorizontalAlignment="Left" Margin="325,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_1r3_Button" Click="PitPicked" Tag="3" Content="PICK" HorizontalAlignment="Left" Margin="425,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_1r4_Button" Click="PitPicked" Tag="4" Content="PICK" HorizontalAlignment="Left" Margin="525,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_1r5_Button" Click="PitPicked" Tag="5" Content="PICK" HorizontalAlignment="Left" Margin="625,325,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
 
-        <Button x:Name="_0r5_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="125,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_0r4_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="225,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_0r3_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="325,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_0r2_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="425,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_0r1_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="525,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-        <Button x:Name="_0r0_Button" Click="PitPicked" Content="PICK" HorizontalAlignment="Left" Margin="625,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
-
-        <Button Content="Do A" HorizontalAlignment="Left" Click="Button_A_Click" Margin="160,506,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Do B" HorizontalAlignment="Left" Click="Button_B_Click" Margin="265,506,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Do C" HorizontalAlignment="Left" Click="Button_C_Click" Margin="370,506,0,0" VerticalAlignment="Top" Width="75"/>
-
+        <Button x:Name="_0r5_Button" Click="PitPicked" Tag="5" Content="PICK" HorizontalAlignment="Left" Margin="125,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_0r4_Button" Click="PitPicked" Tag="4" Content="PICK" HorizontalAlignment="Left" Margin="225,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_0r3_Button" Click="PitPicked" Tag="3" Content="PICK" HorizontalAlignment="Left" Margin="325,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_0r2_Button" Click="PitPicked" Tag="2" Content="PICK" HorizontalAlignment="Left" Margin="425,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_0r1_Button" Click="PitPicked" Tag="1" Content="PICK" HorizontalAlignment="Left" Margin="525,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
+        <Button x:Name="_0r0_Button" Click="PitPicked" Tag="0" Content="PICK" HorizontalAlignment="Left" Margin="625,255,0,0" VerticalAlignment="Top" Width="50" Height="20"/>
 
         <Label x:Name="_0name" Margin="125,179,0,0"  Width="550" Height="30" Content="0name" HorizontalContentAlignment="Center" VerticalContentAlignment="center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
         <Label x:Name="_1name" Margin="125,395,0,0"  Width="550" Height="30" Content="1name" HorizontalContentAlignment="Center" VerticalContentAlignment="center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>

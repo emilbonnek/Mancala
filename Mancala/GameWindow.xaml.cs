@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -23,54 +25,87 @@ namespace Mancala
         private Gamestate state;
         private Player[] players;
         
-        private int? act;
+        private Button[][] pitButtons;
+        private Label[][] pitLabels;
+        
+        
         public GameWindow(Gamestate state, params Player[] players){
             this.state = state;
             this.players = players;
+            
             InitializeComponent();
-
+            
             PrepareBoard(players);
-            UpdatePitValues(state);
+            UpdateBoard(state);
+            
+            
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += KeepAIawake;
+            worker.RunWorkerCompleted += PresentEndGameScreen;
+            worker.RunWorkerAsync();
         }
+
+        private void PresentEndGameScreen(object sender, RunWorkerCompletedEventArgs e){
+            action.Content = $"Game is over, {players[state.Winner()].name} won!";
+            _0name.Background = Brushes.Transparent;
+            _1name.Background = Brushes.Transparent;
+            
+        }
+
+        void KeepAIawake(object sender, DoWorkEventArgs e){
+            while (!state.IsOver()){
+                Player currentPlayer = players[state.turn % 2];
+                if (currentPlayer is AIPlayer){
+                    play(currentPlayer.playTurn(state));
+                }
+                
+                Thread.Sleep(100);
+            }
+        }
+
+        void play(int n){
+            Player currentPlayer = players[state.turn % 2];
+            
+            Dispatcher.Invoke((Action)(() => {
+                action.Content = $"{currentPlayer.name} is playing...";
+            }));
+            // Plays decision (animate)
+            
+            
+            // end
+            state = state.DryPlay(n);
+            Dispatcher.Invoke((Action)(() => {
+                UpdateBoard(state);
+            }));
+        }
+
 
         private void PrepareBoard(Player[] players)
         {
+            // Write player names
             _0name.Content = players[0].name;
             _1name.Content = players[1].name;
-
-            _0r0_Button.Visibility = Visibility.Hidden;
-            _0r1_Button.Visibility = Visibility.Hidden;
-            _0r2_Button.Visibility = Visibility.Hidden;
-            _0r3_Button.Visibility = Visibility.Hidden;
-            _0r4_Button.Visibility = Visibility.Hidden;
-            _0r5_Button.Visibility = Visibility.Hidden;
-
-            _1r0_Button.Visibility = Visibility.Hidden;
-            _1r1_Button.Visibility = Visibility.Hidden;
-            _1r2_Button.Visibility = Visibility.Hidden;
-            _1r3_Button.Visibility = Visibility.Hidden;
-            _1r4_Button.Visibility = Visibility.Hidden;
-            _1r5_Button.Visibility = Visibility.Hidden;
+            
+            // Create a list of all the pit labels
+            pitLabels = new Label[][]{
+                new []{_0r0, _0r1,_0r2, _0r3,_0r4, _0r5, _0pit},
+                new []{_1r0, _1r1,_1r2, _1r3,_1r4, _1r5, _1pit}
+            };
+            
+            // Create a list of all the pit buttons
+            pitButtons = new Button[][]{
+                new []{_0r0_Button, _0r1_Button,_0r2_Button, _0r3_Button,_0r4_Button, _0r5_Button},
+                new []{_1r0_Button, _1r1_Button,_1r2_Button, _1r3_Button,_1r4_Button, _1r5_Button}
+            };
         }
 
-        private void UpdatePitValues(Gamestate state)
+        private void UpdateBoard(Gamestate state)
         {
-            // Alt det her børe sættes i en løkke
-            _0r0.Content = state.rows[0][0].ToString();
-            _0r1.Content = state.rows[0][1].ToString();
-            _0r2.Content = state.rows[0][2].ToString();
-            _0r3.Content = state.rows[0][3].ToString();
-            _0r4.Content = state.rows[0][4].ToString();
-            _0r5.Content = state.rows[0][5].ToString();
-            _0pit.Content = state.rows[0][6].ToString();
-
-            _1r0.Content = state.rows[1][0].ToString();
-            _1r1.Content = state.rows[1][1].ToString();
-            _1r2.Content = state.rows[1][2].ToString();
-            _1r3.Content = state.rows[1][3].ToString();
-            _1r4.Content = state.rows[1][4].ToString();
-            _1r5.Content = state.rows[1][5].ToString();
-            _1pit.Content = state.rows[1][6].ToString();
+            for (int i = 0; i < state.rows.Length; i++){
+                for (int j = 0; j < state.rows[i].Length; j++){
+                    pitLabels[i][j].Content = state.rows[i][j].ToString();
+                }
+            }
 
             if (state.turn % 2 == 0)
             {
@@ -82,81 +117,33 @@ namespace Mancala
                 _0name.Background = Brushes.Transparent;
                 _1name.Background = Brushes.Yellow;
             }
-        }
-
-        private void Button_A_Click(object sender, RoutedEventArgs e)
-        {
-            UpdatePitValues(state);
-        }
-
-        private async void Button_B_Click(object sender, RoutedEventArgs e){
-            Player currentPlayer = players[state.turn % 2];
             
-            // started turn
+            // show and hide the right buttons
+            int[] options = state.Options();
+            for (int i = 0; i < state.rows.Length; i++){
+                if (i == state.turn % 2 && players[state.turn % 2] is HumanPlayer){
+                    for (int j = 0; j < pitButtons[i].Length; j++){
+                        if (options.Contains(j)){
+                            pitButtons[i][j].Visibility = Visibility.Visible;
+                        } else {
+                            pitButtons[i][j].Visibility = Visibility.Hidden;
+                        }
+                    }
+                } else{
+                    for (int j = 0; j < pitButtons[i].Length; j++){
+                        pitButtons[i][j].Visibility = Visibility.Hidden;
+                    }
+                }
+            }
+            
+            Player currentPlayer = players[state.turn % 2];
             action.Content = $"{currentPlayer.name} is thinking...";
             
-            // Makes decision
-            int decision = await Task.Run(() => MakeDecision(currentPlayer));
-
-            action.Content = $"{currentPlayer.name} is playing...";
-            // Plays decision (animate)
-            
-            // ended turn
-
-            action.Content = "";
-            state = state.DryPlay(currentPlayer.playTurn(state));
-            UpdatePitValues(state);
-        }
-
-        private void Button_C_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
         
 
-
-        internal int MakeDecision(Player currentPlayer)
-        {
-            if (currentPlayer is AIPlayer){
-                return players[state.turn % 2].playTurn(state);
-            } else{
-                Dispatcher.Invoke(() => {
-                    switch (currentPlayer.playernumber){
-                        case 0:
-                            // UI operations go inside of Invoke
-                            _0r0_Button.Visibility = Visibility.Visible;
-                            _0r1_Button.Visibility = Visibility.Visible;
-                            _0r2_Button.Visibility = Visibility.Visible;
-                            _0r3_Button.Visibility = Visibility.Visible;
-                            _0r4_Button.Visibility = Visibility.Visible;
-                            _0r5_Button.Visibility = Visibility.Visible;
-                            break;
-                        case 1:
-                            _1r0_Button.Visibility = Visibility.Visible;
-                            _1r1_Button.Visibility = Visibility.Visible;
-                            _1r2_Button.Visibility = Visibility.Visible;
-                            _1r3_Button.Visibility = Visibility.Visible;
-                            _1r4_Button.Visibility = Visibility.Visible;
-                            _1r5_Button.Visibility = Visibility.Visible;
-                            break;
-                        default:
-                            break;
-                    }
-                });
-
-                while (this.act == null){
-                    Thread.Sleep(100);
-                }
-
-                int returnValue = (int) this.act;
-                this.act = null;
-                return returnValue;
-            }
-
-        }
-
         private void PitPicked(object sender, RoutedEventArgs e){
-            this.act = 4;
+            play(int.Parse(((Button) sender).Tag.ToString()));
         }
     }
 }

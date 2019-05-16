@@ -12,7 +12,7 @@ namespace Mancala
         public override int playTurn(Gamestate state)
         {
             Console.WriteLine("{0}'s turn", name);
-            int decision = Minimax(-1, state, 5).Item1;
+            int decision = Minimax(-1, state, 8).Item1;
             Console.WriteLine(decision + 1);
             return decision;
         }
@@ -54,12 +54,12 @@ namespace Mancala
             if (state.turn % state.rows.Length == playernumber)
             {
                 // Its our turn, we want to maximize
-                int maxopt = -1;
+                int maxopt = options[0];
                 Tuple<int, int> max_optvalue = Tuple.Create(-1, int.MinValue);
                 for (int i = 0; i < options.Length; i++)
                 {
                     Tuple<int, int> optvalue = Minimax(options[i], state.DryPlay(options[i]), depth - 1);
-                    if (optvalue.Item2 > max_optvalue.Item2)
+                    if (optvalue.Item2 >= max_optvalue.Item2)
                     {
                         maxopt = options[i];
                         max_optvalue = optvalue;
@@ -71,12 +71,12 @@ namespace Mancala
             else
             {
                 // Its the oppositions turn, we assume they want to minimize
-                int minopt = -1;
+                int minopt = options[0];
                 Tuple<int, int> min_optvalue = Tuple.Create(-1, int.MaxValue);
                 for (int i = 0; i < options.Length; i++)
                 {
                     Tuple<int, int> optvalue = Minimax(options[i], state.DryPlay(options[i]), depth - 1);
-                    if (optvalue.Item2 < min_optvalue.Item2)
+                    if (optvalue.Item2 <= min_optvalue.Item2)
                     {
                         minopt = options[i];
                         min_optvalue = optvalue;

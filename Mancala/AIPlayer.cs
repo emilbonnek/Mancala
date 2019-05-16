@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Mancala
 {
-    public class AIPlayer : Player
-    {
-        public AIPlayer(string name, int playernumber) : base(name, playernumber) { }
+    public class AIPlayer : Player{
+        private int difficulty;
+        public AIPlayer(string name, int playernumber, int difficulty = 8) : base(name, playernumber) {this.difficulty = difficulty}
         public override int playTurn(Gamestate state)
         {
             Console.WriteLine("{0}'s turn", name);
-            int decision = Minimax(-1, state, 8).Item1;
+            int decision = Minimax(-1, state, difficulty).Item1;
             Console.WriteLine(decision + 1);
             return decision;
         }

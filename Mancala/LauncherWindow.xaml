@@ -9,23 +9,31 @@
     <Grid Margin="0,0,0,0">
         <Button Content="Start new game" HorizontalAlignment="Left" Click="Button_Click" Margin="250,220,0,0" VerticalAlignment="Top" Width="100"/>
 
-        <TextBox x:Name="_Name1" GotKeyboardFocus="_Name1_GotKeyboardFocus" LostKeyboardFocus="_Name1_LostKeyboardFocus" HorizontalAlignment="Left" Height="23" Margin="80,164,0,0" TextWrapping="Wrap" Text="Player 1 Name" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="_Name2" GotKeyboardFocus="_Name2_GotKeyboardFocus" LostKeyboardFocus="_Name2_LostKeyboardFocus" HorizontalAlignment="Right" Height="23" Margin="0,164,80,0" TextWrapping="Wrap" Text="Player 2 Name" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="_Name1" Loaded="OnWindowLoaded" HorizontalAlignment="Left" Height="23" Margin="61,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="_Name2" HorizontalAlignment="Right" Height="23" Margin="0,226,64.6,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
 
-        <GroupBox x:Name="Box1" Header="Player1" HorizontalAlignment="Left" Height="100" Margin="100,35,0,0" VerticalAlignment="Top" Width="85">
+        <GroupBox x:Name="Box1" Header="Player1" HorizontalAlignment="Left" Height="100" Margin="80,121,0,0" VerticalAlignment="Top" Width="85">
             <StackPanel>
-                <RadioButton x:Name="_RadioAILeft" Content="AI" Checked="_RadioPlayer_Checked" FlowDirection="RightToLeft"  HorizontalAlignment="Left" Margin="20,20,0,0" />
-                <RadioButton x:Name="_RadioPlayerLeft" Content="Player" Checked="_RadioPlayer_Checked" FlowDirection="RightToLeft" HorizontalAlignment="Left" Margin="0,10,0,0" IsChecked="True"/>
+                <RadioButton x:Name="_RadioAILeft" Content="AI" Click="_RadioLeft_Checked" FlowDirection="RightToLeft"  HorizontalAlignment="Left" Margin="20,20,0,0" />
+                <RadioButton x:Name="_RadioPlayerLeft" Content="Player" Click="_RadioLeft_Checked" FlowDirection="RightToLeft" HorizontalAlignment="Left" Margin="0,10,0,0" IsChecked="True" />
             </StackPanel>
         </GroupBox>
 
-        <GroupBox x:Name="Box2" Header="Player2" HorizontalAlignment="Right" Height="100" Margin="0,35,100,0" VerticalAlignment="Top" Width="85"/>
-        <StackPanel>
-            <RadioButton x:Name="_RadioAIRight" Content="AI" Checked="_RadioPlayer_Checked"  HorizontalAlignment="Right" Margin="0,63,141.6,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="_RadioPlayerRight" Content="Player" Checked="_RadioPlayer_Checked" HorizontalAlignment="Right" Margin="0,20,124,0" VerticalAlignment="Top" IsChecked="True" />
-        </StackPanel>
+        <GroupBox x:Name="Box2" Header="Player2" HorizontalAlignment="Right" Height="100" Margin="0,121,83.6,0" VerticalAlignment="Top" Width="85">
+            <StackPanel>
+                <RadioButton x:Name="_RadioAIRight" Content="AI" Click="_RadioRight_Checked"  HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="_RadioPlayerRight" Content="Player" Click="_RadioRight_Checked" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" IsChecked="True" />
+            </StackPanel>
+        </GroupBox>
 
-        <TextBlock HorizontalAlignment="Left" Margin="262,295,0,0" TextWrapping="Wrap" Text="MANCALA" VerticalAlignment="Top" FontSize="16"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="262,40,0,0" TextWrapping="Wrap" Text="MANCALA" VerticalAlignment="Top" FontSize="16"/>
+
+        <TextBlock x:Name="_DifficultyLeft" TextWrapping="Wrap" TextAlignment="Center" Text="" Margin="93,291,442.6,43.4"/>
+        <Slider x:Name="_SliderLeft" HorizontalAlignment="Left" ValueChanged="_SliderLeft_ValueChanged" Margin="61,270,0,0" VerticalAlignment="Top" Width="120" Height="25" Minimum="1" Maximum="9" IsSnapToTickEnabled="True" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9"/>
+
+        <TextBlock x:Name="_DifficultyRight" TextWrapping="Wrap" TextAlignment="Center" Text="" Margin="442,291,93.6,43.4" Visibility="Hidden"/>
+        <Slider x:Name="_SliderRight" HorizontalAlignment="Left" ValueChanged="_SliderRight_ValueChanged" Margin="409,270,0,0" VerticalAlignment="Top" Width="120" Height="25" Minimum="1" Maximum="9" IsSnapToTickEnabled="True" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9" Visibility="Hidden"/>
 
     </Grid>
 </Window>

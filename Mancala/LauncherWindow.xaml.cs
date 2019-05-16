@@ -24,16 +24,39 @@ namespace Mancala
         private Player player1;
         private Gamestate state = new Gamestate(0, new[] { 6, 6, 6, 6, 6, 6, 0 }, new[] { 6, 6, 6, 6, 6, 6, 0 });
 
+        private String projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
         private String name1;
         private String name2;
         private String inputName1;
         private String inputName2;
 
-        private bool alreadyFocused;
 
         public LauncherWindow()
         {
             InitializeComponent();
+        }
+
+        private void OnWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            // Set variables for path
+            inputName1 = System.IO.Path.Combine(projectDirectory, "Name1.txt");
+            inputName2 = System.IO.Path.Combine(projectDirectory, "Name2.txt");
+
+            // Read from files
+            using (StreamReader sr1 = new StreamReader(inputName1))
+            {
+                inputName1 = String.Join(" ", File.ReadAllLines(inputName1));
+                sr1.Close();
+            }
+
+            using (StreamReader sr2 = new StreamReader(inputName2))
+            {
+                inputName2 = String.Join(" ", File.ReadAllLines(inputName2));
+                sr2.Close();
+            }
+
+            _Name1.Text = inputName1;
+            _Name2.Text = inputName2;
         }
 
 
@@ -43,61 +66,38 @@ namespace Mancala
             name1 = _Name1.Text;
             name2 = _Name2.Text;
 
-            // Set a variable to the Documents path.
-            string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-
             // Write to files
             using (StreamWriter outputFile = new StreamWriter(System.IO.Path.Combine(projectDirectory, "Name1.txt")))
             {
                 outputFile.WriteLine(name1);
+                outputFile.Close();
             }
 
             using (StreamWriter outputFile = new StreamWriter(System.IO.Path.Combine(projectDirectory, "Name2.txt")))
             {
                 outputFile.WriteLine(name2);
+                outputFile.Close();
             }
 
-            // Set variables for path
-            inputName1 = System.IO.Path.Combine(projectDirectory, "Name1.txt");
-            inputName2 = System.IO.Path.Combine(projectDirectory, "Name2.txt");
-
-            // Read from files
-            using (StreamReader sr1 = new StreamReader(inputName1))
+            if (_RadioPlayerLeft.IsChecked == true)
             {
-                inputName1 = sr1.ReadToEnd();
-                sr1.Close();
-            }
-            
-            using (StreamReader sr2 = new StreamReader(inputName2))
+                player0 = new HumanPlayer(name1, 0);
+            } else
             {
-                inputName2 = sr2.ReadToEnd();
-                sr2.Close();
+                int dif = Convert.ToInt32(_SliderLeft.Value);
+                player0 = GenerateAIPlayerOfDif(dif);
             }
 
-            if (_RadioPlayerLeft.IsChecked == true && _RadioPlayerRight.IsChecked == true)
+            if (_RadioPlayerRight.IsChecked == true)
             {
-                player0 = new HumanPlayer(inputName1, 0);
-                player1 = new HumanPlayer(inputName2, 1);
-
+                player1 = new HumanPlayer(name2, 1);
+            }
+            else
+            {
+                int dif = Convert.ToInt32(_SliderRight.Value);
+                player1 = GenerateAIPlayerOfDif(dif);
             }
 
-            else if (_RadioPlayerRight.IsChecked == true && _RadioAILeft.IsChecked == true)
-            {
-                player0 = new AIPlayer("AI", 1);
-                player1 = new HumanPlayer(inputName2, 0);
-            }
-
-            else if (_RadioPlayerLeft.IsChecked == true && _RadioAIRight.IsChecked == true)
-            {
-                player0 = new HumanPlayer(inputName1, 0);
-                player1 = new AIPlayer("AI", 1);
-            }
-
-            else if (_RadioAIRight.IsChecked == true && _RadioAILeft.IsChecked == true)
-            {
-                player0 = new AIPlayer("AI", 1);
-                player1 = new AIPlayer("AI", 1);
-            }
 
             var newMyWindow2 = new GameWindow(state, player0, player1);
             newMyWindow2.Show();
@@ -105,63 +105,102 @@ namespace Mancala
             newMyWindow2.Closed += new EventHandler(GameWindow_Closed);
         }
 
+        private AIPlayer GenerateAIPlayerOfDif(int dif)
+        {
+            if (dif == 1)
+            {
+                return new RandomPlayer("AI", 1);
+            }
+            else
+            {
+                return new MiniMaxPlayer("AI", 1, dif);
+            }
+        }
+
+
         private void GameWindow_Closed(object sender, EventArgs e)
         {
             this.Show();
         }
 
-        private void _RadioPlayer_Checked(object sender, RoutedEventArgs e)
+        private void _RadioLeft_Checked(object sender, RoutedEventArgs e)
         {
             if (_RadioAILeft.IsChecked == true)
             {
                 _Name1.Text = "AI";
                 _Name1.IsReadOnly = true;
-            } else
+                _SliderLeft.Visibility = Visibility.Visible;
+                _DifficultyLeft.Visibility = Visibility.Visible;
+            }
+            else
             {
                 _Name1.IsReadOnly = false;
+                _Name1.Text = "";
+                _SliderLeft.Visibility = Visibility.Hidden;
+                _DifficultyLeft.Visibility = Visibility.Hidden;
+
             }
-/*
+        }
+
+        private void _RadioRight_Checked(object sender, RoutedEventArgs e)
+        {
             if (_RadioAIRight.IsChecked == true)
             {
                 _Name2.Text = "AI";
                 _Name2.IsReadOnly = true;
+                _SliderRight.Visibility = Visibility.Visible;
+                _DifficultyRight.Visibility = Visibility.Visible;
+
             }
             else
             {
                 _Name2.IsReadOnly = false;
-            }
-            */
-        }
+                _Name2.Text = "";
+                _SliderRight.Visibility = Visibility.Hidden;
+                _DifficultyRight.Visibility = Visibility.Hidden;
 
-        //Textbox text disapear/reappear
-        private void _Name1_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            TextBox box = sender as TextBox;
-            if (!alreadyFocused && box.Text == "Player 1 Name")
-            {
-                box.Text = String.Empty;
-                alreadyFocused = true;
-            } 
-        }
 
-        private void _Name1_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            alreadyFocused = false;
-        }
-
-        private void _Name2_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            TextBox box = sender as TextBox;
-            if (!alreadyFocused && box.Text =="Player 2 Name")
-            {
-                box.Text = String.Empty;
-                alreadyFocused = true;
             }
         }
 
-        private void _Name2_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void _SliderLeft_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            alreadyFocused = false;
+            if (_SliderLeft.Value >= 1 && _SliderLeft.Value <= 3)
+            {
+
+                _DifficultyLeft.Text = "Easy";
+            }
+            else if (_SliderLeft.Value >= 4 && _SliderLeft.Value <= 6)
+            {
+
+                _DifficultyLeft.Text = "Medium";
+            }
+            else if (_SliderLeft.Value >= 7 && _SliderLeft.Value <= 9)
+            {
+
+                _DifficultyLeft.Text = "Hard";
+
+            }
+        }
+
+            private void _SliderRight_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+            {
+            if (_SliderRight.Value >= 1 && _SliderRight.Value <= 3)
+            {
+
+                _DifficultyRight.Text = "Easy";
+            }
+            else if (_SliderRight.Value >= 4 && _SliderRight.Value <= 6)
+            {
+
+                _DifficultyRight.Text = "Medium";
+            }
+            else if(_SliderRight.Value >= 7 && _SliderRight.Value <= 9)
+            {
+
+                _DifficultyRight.Text = "Hard";
+
+            }
         }
     }
 }

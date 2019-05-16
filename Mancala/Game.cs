@@ -14,7 +14,7 @@ namespace Mancala
 
             // Set up the players
             Player player1 = new HumanPlayer("Player", 0);
-            Player player2 = new AIPlayer("AI", 1);
+            Player player2 = new MiniMaxPlayer("AI", 1);
             players = new[] { player1, player2 };
         }
 

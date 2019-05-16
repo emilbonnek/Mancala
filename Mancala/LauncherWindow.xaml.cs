@@ -19,9 +19,7 @@ namespace Mancala
     /// Interaction logic for LauncherWindow.xaml
     /// </summary>
     public partial class LauncherWindow : Window
-    {
-        private string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        
+    {        
         private Player player0;
         private Player player1;
         private Gamestate state = new Gamestate(0, new[] { 6, 6, 6, 6, 6, 6, 0 }, new[] { 6, 6, 6, 6, 6, 6, 0 });
@@ -37,6 +35,7 @@ namespace Mancala
         {
             InitializeComponent();
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -61,21 +60,44 @@ namespace Mancala
             // Set variables for path
             inputName1 = System.IO.Path.Combine(projectDirectory, "Name1.txt");
             inputName2 = System.IO.Path.Combine(projectDirectory, "Name2.txt");
-            
+
             // Read from files
-            using (StreamReader sr = new StreamReader(inputName1))
+            using (StreamReader sr1 = new StreamReader(inputName1))
             {
-                inputName1 = sr.ReadToEnd();
+                inputName1 = sr1.ReadToEnd();
+                sr1.Close();
+            }
+            
+            using (StreamReader sr2 = new StreamReader(inputName2))
+            {
+                inputName2 = sr2.ReadToEnd();
+                sr2.Close();
             }
 
-            using (StreamReader sr = new StreamReader(inputName2))
+            if (_RadioPlayerLeft.IsChecked == true && _RadioPlayerRight.IsChecked == true)
             {
-                inputName2 = sr.ReadToEnd();
+                player0 = new HumanPlayer(inputName1, 0);
+                player1 = new HumanPlayer(inputName2, 1);
+
             }
 
+            else if (_RadioPlayerRight.IsChecked == true && _RadioAILeft.IsChecked == true)
+            {
+                player0 = new AIPlayer("AI", 1);
+                player1 = new HumanPlayer(inputName2, 0);
+            }
 
-            Console.WriteLine(player0);
-            Console.WriteLine(player1);
+            else if (_RadioPlayerLeft.IsChecked == true && _RadioAIRight.IsChecked == true)
+            {
+                player0 = new HumanPlayer(inputName1, 0);
+                player1 = new AIPlayer("AI", 1);
+            }
+
+            else if (_RadioAIRight.IsChecked == true && _RadioAILeft.IsChecked == true)
+            {
+                player0 = new AIPlayer("AI", 1);
+                player1 = new AIPlayer("AI", 1);
+            }
 
             var newMyWindow2 = new GameWindow(state, player0, player1);
             newMyWindow2.Show();
@@ -90,31 +112,25 @@ namespace Mancala
 
         private void _RadioPlayer_Checked(object sender, RoutedEventArgs e)
         {
-
-          /*  if (_RadioPlayerLeft.IsChecked == true && _RadioPlayerRight.IsChecked == true)
+            if (_RadioAILeft.IsChecked == true)
             {
-                player0 = new HumanPlayer(inputName1, 0);
-                player1 = new HumanPlayer(inputName2, 0);
-            }
-
-            else if (_RadioAILeft.IsChecked == true && _RadioPlayerRight.IsChecked == true)
+                _Name1.Text = "AI";
+                _Name1.IsReadOnly = true;
+            } else
             {
-                player0 = new AIPlayer("AI", 1);
-                player1 = new HumanPlayer(inputName2, 0);
+                _Name1.IsReadOnly = false;
             }
-
-            else if (_RadioAIRight.IsChecked == true && _RadioPlayerLeft.IsChecked == true)
+/*
+            if (_RadioAIRight.IsChecked == true)
             {
-                player0 = new HumanPlayer(inputName1, 0);
-                player1 = new AIPlayer("AI", 1);
+                _Name2.Text = "AI";
+                _Name2.IsReadOnly = true;
             }
-
-            else if (_RadioAILeft.IsChecked == true && _RadioAIRight.IsChecked == true)
+            else
             {
-                player0 = new AIPlayer("AI", 1);
-                player1 = new AIPlayer("AI", 1);
+                _Name2.IsReadOnly = false;
             }
-*/            
+            */
         }
 
         //Textbox text disapear/reappear
@@ -125,7 +141,7 @@ namespace Mancala
             {
                 box.Text = String.Empty;
                 alreadyFocused = true;
-            }
+            } 
         }
 
         private void _Name1_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

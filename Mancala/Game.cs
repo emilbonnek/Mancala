@@ -29,8 +29,7 @@ namespace Mancala
             this.players = players;
         }
 
-
-
+        
         public int playTurn()
         {
             Player currentplayer = players[currentState.turn % players.Length];
@@ -41,8 +40,7 @@ namespace Mancala
             return decision;
         }
 
-
-
+        
         public void finalpresentation()
         {
             Console.WriteLine("{0} won!", Winner());

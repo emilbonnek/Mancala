@@ -5,9 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mancala"
         mc:Ignorable="d"
-        Title="LauncherWindow" Height="450" Width="600">
-    <Grid>
-        <Button Content="Start new game" HorizontalAlignment="Left" Click="Button_Click" Margin="412,133,0,0" VerticalAlignment="Top" Width="75"/>
+        Title="LauncherWindow" Height="400" Width="600">
+    <Grid Margin="0,0,0,0">
+        <Button Content="Start new game" HorizontalAlignment="Left" Click="Button_Click" Margin="250,220,0,0" VerticalAlignment="Top" Width="100"/>
+
+        <TextBox x:Name="_Name1" GotKeyboardFocus="_Name1_GotKeyboardFocus" LostKeyboardFocus="_Name1_LostKeyboardFocus" HorizontalAlignment="Left" Height="23" Margin="80,164,0,0" TextWrapping="Wrap" Text="Player 1 Name" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="_Name2" GotKeyboardFocus="_Name2_GotKeyboardFocus" LostKeyboardFocus="_Name2_LostKeyboardFocus" HorizontalAlignment="Right" Height="23" Margin="0,164,80,0" TextWrapping="Wrap" Text="Player 2 Name" VerticalAlignment="Top" Width="120" />
+
+        <GroupBox x:Name="Box1" Header="Player1" HorizontalAlignment="Left" Height="100" Margin="100,35,0,0" VerticalAlignment="Top" Width="85">
+            <StackPanel>
+                <RadioButton x:Name="_RadioAILeft" Content="AI" Checked="_RadioPlayer_Checked" FlowDirection="RightToLeft"  HorizontalAlignment="Left" Margin="20,20,0,0" />
+                <RadioButton x:Name="_RadioPlayerLeft" Content="Player" Checked="_RadioPlayer_Checked" FlowDirection="RightToLeft" HorizontalAlignment="Left" Margin="0,10,0,0" IsChecked="True"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox x:Name="Box2" Header="Player2" HorizontalAlignment="Right" Height="100" Margin="0,35,100,0" VerticalAlignment="Top" Width="85"/>
+        <StackPanel>
+            <RadioButton x:Name="_RadioAIRight" Content="AI" Checked="_RadioPlayer_Checked"  HorizontalAlignment="Right" Margin="0,63,141.6,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="_RadioPlayerRight" Content="Player" Checked="_RadioPlayer_Checked" HorizontalAlignment="Right" Margin="0,20,124,0" VerticalAlignment="Top" IsChecked="True" />
+        </StackPanel>
+
+        <TextBlock HorizontalAlignment="Left" Margin="262,295,0,0" TextWrapping="Wrap" Text="MANCALA" VerticalAlignment="Top" FontSize="16"/>
 
     </Grid>
 </Window>

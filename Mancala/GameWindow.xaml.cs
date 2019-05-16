@@ -56,7 +56,7 @@ namespace Mancala
             while (!state.IsOver()){
                 Player currentPlayer = players[state.turn % 2];
                 if (currentPlayer is AIPlayer){
-                    play(currentPlayer.playTurn(state));
+                    play(((AIPlayer) currentPlayer).playTurn(state));
                 }
                 
                 Thread.Sleep(100);
@@ -69,9 +69,8 @@ namespace Mancala
             Dispatcher.Invoke((Action)(() => {
                 action.Content = $"{currentPlayer.name} is playing...";
             }));
-            // Plays decision (animate)
-            
-            
+
+
             // end
             state = state.DryPlay(n);
             Dispatcher.Invoke((Action)(() => {

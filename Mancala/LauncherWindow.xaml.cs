@@ -135,7 +135,7 @@ namespace Mancala
             else
             {
                 _Name1.IsReadOnly = false;
-                _Name1.Text = "";
+                _Name1.Text = "Player 1";
                 _SliderLeft.Visibility = Visibility.Hidden;
                 _DifficultyLeft.Visibility = Visibility.Hidden;
 
@@ -155,7 +155,7 @@ namespace Mancala
             else
             {
                 _Name2.IsReadOnly = false;
-                _Name2.Text = "";
+                _Name2.Text = "Player 2";
                 _SliderRight.Visibility = Visibility.Hidden;
                 _DifficultyRight.Visibility = Visibility.Hidden;
 
@@ -165,21 +165,15 @@ namespace Mancala
 
         private void _SliderLeft_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (_SliderLeft.Value >= 1 && _SliderLeft.Value <= 3)
-            {
+            if (_SliderLeft.Value >= 1 && _SliderLeft.Value <= 3){
 
                 _DifficultyLeft.Text = "Easy";
-            }
-            else if (_SliderLeft.Value >= 4 && _SliderLeft.Value <= 6)
-            {
+            } else if (_SliderLeft.Value >= 4 && _SliderLeft.Value <= 6){
 
                 _DifficultyLeft.Text = "Medium";
-            }
-            else if (_SliderLeft.Value >= 7 && _SliderLeft.Value <= 9)
-            {
+            } else if (_SliderLeft.Value >= 7 && _SliderLeft.Value <= 9){
 
                 _DifficultyLeft.Text = "Hard";
-
             }
         }
 

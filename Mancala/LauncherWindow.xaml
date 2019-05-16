@@ -29,8 +29,8 @@
 
         <TextBlock HorizontalAlignment="Left" Margin="262,40,0,0" TextWrapping="Wrap" Text="MANCALA" VerticalAlignment="Top" FontSize="16"/>
 
-        <TextBlock x:Name="_DifficultyLeft" TextWrapping="Wrap" TextAlignment="Center" Text="" Margin="93,291,442.6,43.4"/>
-        <Slider x:Name="_SliderLeft" HorizontalAlignment="Left" ValueChanged="_SliderLeft_ValueChanged" Margin="61,270,0,0" VerticalAlignment="Top" Width="120" Height="25" Minimum="1" Maximum="9" IsSnapToTickEnabled="True" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9"/>
+        <TextBlock x:Name="_DifficultyLeft" TextWrapping="Wrap" TextAlignment="Center" Text="" Margin="93,291,442.6,43.4"  Visibility="Hidden"/>
+        <Slider x:Name="_SliderLeft" HorizontalAlignment="Left" ValueChanged="_SliderLeft_ValueChanged" Margin="61,270,0,0" VerticalAlignment="Top" Width="120" Height="25" Minimum="1" Maximum="9" IsSnapToTickEnabled="True" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9"  Visibility="Hidden"/>
 
         <TextBlock x:Name="_DifficultyRight" TextWrapping="Wrap" TextAlignment="Center" Text="" Margin="442,291,93.6,43.4" Visibility="Hidden"/>
         <Slider x:Name="_SliderRight" HorizontalAlignment="Left" ValueChanged="_SliderRight_ValueChanged" Margin="409,270,0,0" VerticalAlignment="Top" Width="120" Height="25" Minimum="1" Maximum="9" IsSnapToTickEnabled="True" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9" Visibility="Hidden"/>

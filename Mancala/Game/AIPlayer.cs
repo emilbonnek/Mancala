@@ -10,5 +10,6 @@ namespace Mancala
 
         public AIPlayer(string name, int playernumber) : base(name, playernumber){}
         
+        public abstract int playTurn(Gamestate state);
     }
 }

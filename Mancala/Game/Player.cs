@@ -16,6 +16,6 @@ namespace Mancala
             this.playernumber = playernumber;
         }
 
-        public abstract int playTurn(Gamestate state);
+      
     }
 }
